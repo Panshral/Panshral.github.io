@@ -3,6 +3,60 @@ layout: default
 title: Home
 ---
 
+<!-- Top Section -->
+<section class="container mb-5">
+  <div class="row">
+    
+    <!-- Left: Latest Blogs -->
+    <div class="col-md-3">
+      <h5><i class="fas fa-rss"></i> Latest Blogs</h5>
+      <ul class="list-unstyled">
+        {% for post in site.posts limit: 4 %}
+        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Center: Featured Products -->
+    <div class="col-md-6 text-center">
+      <h5><i class="fas fa-star"></i> Panshral Picks</h5>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% assign featured = site.products | where: "tags", "featured" | slice: 0, 2 %}
+        {% for product in featured %}
+        <div class="col">
+          <div class="card h-100">
+            <img src="{{ product.images[0] }}" class="card-img-top" alt="{{ product.title }}">
+            <div class="card-body">
+              <h6 class="card-title">{{ product.title }}</h6>
+              <a href="{{ product.affiliate_link }}" class="btn btn-success btn-sm" target="_blank">Buy Now</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Right: Weekly Picks -->
+    <div class="col-md-3">
+      <h5><i class="fas fa-calendar-week"></i> Weekly Deals</h5>
+      <ul class="list-unstyled">
+        {% assign weekly = site.products | where: "tags", "weekly" | slice: 0, 4 %}
+        {% for product in weekly %}
+        <li><a href="{{ product.affiliate_link }}" target="_blank">{{ product.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
 <section class="container">
   <h2 class="text-center mb-4">Panshral Picks</h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
