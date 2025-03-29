@@ -6,7 +6,7 @@ title: Home
 <section class="container">
   <h2 class="text-center mb-4">Panshral Picks</h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    {% assign featured = site.products | sort: 'date' | reverse | slice: 0, 6 %}
+    {% assign featured = site.products | sort: 'date' | reverse | slice: 0, 9 %}
     {% for product in featured %}
     <div class="col">
       <div class="card h-100">
