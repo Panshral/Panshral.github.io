@@ -7,13 +7,17 @@ title: Products
   <h2 class="text-center mb-4">All Products</h2>
 
   <!-- Filter Buttons -->
-  <div class="text-center mb-4">
-    <button class="btn btn-outline-success me-2 filter-btn" data-filter="all"><i class="fas fa-border-all me-1"></i>All</button>
+  <div class="text-center mb-4" id="category-filters">
+    <button class="btn btn-outline-success me-2 filter-btn" data-filter="all" id="btn-all">
+      <i class="fas fa-border-all me-1"></i> All
+    </button>
     {% assign all_categories = site.products | map: "categories" | join: ',' | split: ',' | uniq %}
     {% for cat in all_categories %}
       {% assign cat_trimmed = cat | strip %}
       {% if cat_trimmed != "" %}
-      <button class="btn btn-outline-secondary me-2 filter-btn" data-filter="{{ cat_trimmed | downcase }}">{{ cat_trimmed }}</button>
+      <button class="btn btn-outline-secondary me-2 filter-btn" data-filter="{{ cat_trimmed | downcase }}">
+        {{ cat_trimmed }}
+      </button>
       {% endif %}
     {% endfor %}
   </div>
@@ -63,19 +67,27 @@ title: Products
   document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
     const categoryFilter = urlParams.get("category");
+    const cards = document.querySelectorAll(".product-card");
+    const buttons = document.querySelectorAll(".filter-btn");
 
     if (categoryFilter) {
-      const cards = document.querySelectorAll(".product-card");
+      const lowerFilter = categoryFilter.toLowerCase();
+
       cards.forEach(card => {
         const category = card.getAttribute("data-category");
-        if (category.toLowerCase() !== categoryFilter.toLowerCase()) {
-          card.style.display = "none";
-        }
+        card.style.display = category.includes(lowerFilter) ? "block" : "none";
       });
 
-      // Scroll into view
-      const title = document.querySelector("h2");
-      if (title) title.scrollIntoView({ behavior: "smooth" });
+      // Set active button
+      buttons.forEach(btn => {
+        btn.classList.remove("btn-outline-success");
+        btn.classList.remove("btn-outline-secondary");
+        if (btn.getAttribute("data-filter") === lowerFilter) {
+          btn.classList.add("btn-outline-success");
+        } else {
+          btn.classList.add("btn-outline-secondary");
+        }
+      });
     }
   });
 </script>
