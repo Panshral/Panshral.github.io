@@ -18,7 +18,7 @@ title: Products
     {% endfor %}
   </div>
 
-  <!-- Product Grid (5 per row using Bootstrap 5 col-md-2) -->
+  <!-- Product Grid (5 per row) -->
   <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-3">
     {% assign sorted = site.products | sort: 'date' | reverse %}
     {% for product in sorted %}
@@ -32,26 +32,40 @@ title: Products
       </div>
     </div>
 
-    <!-- Product Modal -->
+    <!-- Modal with Vertical Carousel -->
     <div class="modal fade" id="modal-{{ forloop.index }}" tabindex="-1" aria-labelledby="modalLabel-{{ forloop.index }}" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalLabel-{{ forloop.index }}">{{ product.title }}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            {% if product.images.size > 1 %}
-              <div class="mb-3 d-flex flex-wrap gap-2">
-                {% for img in product.images %}
-                <img src="{{ img }}" class="img-thumbnail" style="max-height:150px;">
-                {% endfor %}
+            <div class="row">
+              <!-- Thumbnails Left -->
+              <div class="col-md-3">
+                <div class="nav flex-column nav-pills me-3" id="v-pills-tab-{{ forloop.index }}" role="tablist" aria-orientation="vertical">
+                  {% for img in product.images %}
+                  <button class="nav-link {% if forloop.first %}active{% endif %}" id="v-tab-{{ forloop.index }}-{{ forloop.index0 }}" data-bs-toggle="pill" data-bs-target="#v-img-{{ forloop.index }}-{{ forloop.index0 }}" type="button" role="tab" aria-controls="v-img-{{ forloop.index }}-{{ forloop.index0 }}" aria-selected="true">
+                    <img src="{{ img }}" class="img-fluid" style="max-height: 60px;">
+                  </button>
+                  {% endfor %}
+                </div>
               </div>
-            {% else %}
-              <img src="{{ product.images[0] }}" class="img-fluid mb-3" alt="{{ product.title }}">
-            {% endif %}
-            <p><strong>Store:</strong> {{ product.store }}</p>
-            <p>{{ product.description }}</p>
+
+              <!-- Main Image Right -->
+              <div class="col-md-9">
+                <div class="tab-content" id="v-pills-tabContent-{{ forloop.index }}">
+                  {% for img in product.images %}
+                  <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="v-img-{{ forloop.index }}-{{ forloop.index0 }}" role="tabpanel" aria-labelledby="v-tab-{{ forloop.index }}-{{ forloop.index0 }}">
+                    <img src="{{ img }}" class="img-fluid mb-3 w-100" style="max-height: 400px; object-fit: contain;">
+                  </div>
+                  {% endfor %}
+                  <p><strong>Store:</strong> {{ product.store }}</p>
+                  <p>{{ product.description }}</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="modal-footer">
             <a href="{{ product.affiliate_link }}" class="btn btn-success" target="_blank">Buy from {{ product.store }}</a>
@@ -73,14 +87,11 @@ title: Products
 
     function applyFilter(filterValue) {
       currentFilter = filterValue;
-
-      // Show/hide product cards
       cards.forEach(card => {
         const category = card.getAttribute("data-category");
         card.style.display = (filterValue === 'all' || category.includes(filterValue)) ? "block" : "none";
       });
 
-      // Update button styling
       buttons.forEach(btn => {
         if (btn.getAttribute("data-filter") === filterValue) {
           btn.classList.remove("btn-outline-secondary");
@@ -92,10 +103,8 @@ title: Products
       });
     }
 
-    // Apply initial filter from URL param
     applyFilter(currentFilter);
 
-    // Update filter on button click
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
         const newFilter = btn.getAttribute("data-filter");
