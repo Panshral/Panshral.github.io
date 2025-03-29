@@ -1,0 +1,19 @@
+---
+layout: default
+title: Products
+---
+
+<h2>Latest Product Drops</h2>
+{% assign sorted = site.products | sort: 'date' | reverse %}
+{% assign grouped = sorted | group_by_exp:"item", "item.date | date: '%Y-%m-%d'" %}
+{% for group in grouped %}
+  <h3>{{ group.name }}</h3>
+  <div style="display:flex; flex-wrap:wrap; gap:1rem;">
+    {% for product in group.items %}
+      <div style="border:1px solid #ddd; padding:1rem; max-width:250px;">
+        <h4><a href="{{ product.url }}">{{ product.title }}</a></h4>
+        <p><a href="{{ product.affiliate_link }}" target="_blank" style="color:#2f5c40;">Buy from {{ product.store }}</a></p>
+      </div>
+    {% endfor %}
+  </div>
+{% endfor %}
