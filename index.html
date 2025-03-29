@@ -18,27 +18,29 @@ title: Home
     </div>-->
 
     <!-- Latest Blogs with image -->
-    <ul class="list-unstyled">
-      {% for post in site.posts limit: 3 %}
-      <li class="mb-3 d-flex">
-        {% if post.cover_image %}
-        <img src="{{ post.cover_image }}" alt="{{ post.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
-        {% endif %}
-        <div>
-          <a href="{{ post.url }}"><strong>{{ post.title }}</strong></a><br>
-          <small>{{ post.date | date: "%b %d, %Y" }}</small>
-        </div>
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="col-md-2">
+      <ul class="list-unstyled">
+        {% for post in site.posts limit: 3 %}
+        <li class="mb-3 d-flex">
+          {% if post.cover_image %}
+          <img src="{{ post.cover_image }}" alt="{{ post.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
+          {% endif %}
+          <div>
+            <a href="{{ post.url }}"><strong>{{ post.title }}</strong></a><br>
+            <small>{{ post.date | date: "%b %d, %Y" }}</small>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
 
 
 
     <!-- Center: Featured Products -->
-    <div class="col-md-6 text-center">
+    <div class="col-md-8 text-center">
       <h5><i class="fas fa-star"></i> Panshral Picks</h5>
       <div class="row row-cols-1 row-cols-md-2 g-4">
-        {% assign featured = site.products | where: "tags", "featured" | slice: 0, 2 %}
+        {% assign featured = site.products | where: "tags", "featured" | slice: 0, 3 %}
         {% for product in featured %}
         <div class="col">
           <div class="card h-100">
@@ -54,7 +56,7 @@ title: Home
     </div>
 
     <!-- Right: Weekly Picks -->
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h5><i class="fas fa-calendar-week"></i> Weekly Deals</h5>
       <ul class="list-unstyled">
         {% assign weekly = site.products | where: "tags", "weekly" | slice: 0, 4 %}
