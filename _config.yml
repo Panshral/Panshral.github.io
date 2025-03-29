@@ -1,5 +1,5 @@
-title: Panshral
-description: Curated affiliate picks in fashion, tech, fitness & health
+title: Amado Jekyll
+description: Starter Jekyll theme
 baseurl: ""
 url: ""
 markdown: kramdown
@@ -7,4 +7,4 @@ markdown: kramdown
 collections:
   products:
     output: true
-    permalink: /products/:year/:month/:day/:title/
+    permalink: /products/:name/
