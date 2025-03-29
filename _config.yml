@@ -1,0 +1,10 @@
+title: Panshral
+description: Curated affiliate picks in fashion, tech, fitness & health
+baseurl: ""
+url: ""
+markdown: kramdown
+
+collections:
+  products:
+    output: true
+    permalink: /products/:year/:month/:day/:title/
