@@ -38,7 +38,7 @@ title: Products
     {% endfor %}
   </div>
 </section>
-
+<!--
 <script>
   // Simple product filter
   document.addEventListener('DOMContentLoaded', function () {
@@ -59,35 +59,47 @@ title: Products
       });
     });
   });
-</script>
+</script>-->
 
 
 <!-- This section will show filtered view based on selection on Homepage-->  
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const categoryFilter = urlParams.get("category");
+    const initialFilter = urlParams.get("category");
     const cards = document.querySelectorAll(".product-card");
     const buttons = document.querySelectorAll(".filter-btn");
 
-    if (categoryFilter) {
-      const lowerFilter = categoryFilter.toLowerCase();
-
+    function applyFilter(filterValue) {
+      // Show/hide cards
       cards.forEach(card => {
         const category = card.getAttribute("data-category");
-        card.style.display = category.includes(lowerFilter) ? "block" : "none";
+        card.style.display = (filterValue === 'all' || category.includes(filterValue)) ? "block" : "none";
       });
 
-      // Set active button
+      // Reset button styles
       buttons.forEach(btn => {
-        btn.classList.remove("btn-outline-success");
-        btn.classList.remove("btn-outline-secondary");
-        if (btn.getAttribute("data-filter") === lowerFilter) {
+        if (btn.getAttribute("data-filter") === filterValue) {
+          btn.classList.remove("btn-outline-secondary");
           btn.classList.add("btn-outline-success");
         } else {
+          btn.classList.remove("btn-outline-success");
           btn.classList.add("btn-outline-secondary");
         }
       });
     }
+
+    // Apply initial filter from query string
+    if (initialFilter) {
+      applyFilter(initialFilter.toLowerCase());
+    }
+
+    // Apply filter on button click
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const filterValue = btn.getAttribute("data-filter");
+        applyFilter(filterValue);
+      });
+    });
   });
 </script>
