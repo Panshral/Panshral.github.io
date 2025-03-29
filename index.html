@@ -7,18 +7,9 @@ title: Home
 <section class="container mb-5">
   <div class="row">
 
-    <!-- Left: Latest Blogs -->
-    <!--<div class="col-md-3">
-      <h5><i class="fas fa-rss"></i> Latest Blogs</h5>
-      <ul class="list-unstyled">
-        {% for post in site.posts limit: 4 %}
-        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-        {% endfor %}
-      </ul>
-    </div>-->
-
     <!-- Latest Blogs with image -->
     <div class="col-md-2">
+      <h5><i class="fas fa-rss"></i> Latest Blogs</h5>
       <ul class="list-unstyled">
         {% for post in site.posts limit: 3 %}
         <li class="mb-3 d-flex">
@@ -34,24 +25,28 @@ title: Home
       </ul>
     </div>
 
-
-
     <!-- Center: Featured Products -->
-    <div class="col-md-8 text-center">
-      <h5><i class="fas fa-star"></i> Panshral Picks</h5>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        {% assign featured = site.products | where: "tags", "featured" | slice: 0, 3 %}
-        {% for product in featured %}
-        <div class="col">
-          <div class="card h-100">
-            <img src="{{ product.images[0] }}" class="card-img-top" alt="{{ product.title }}">
-            <div class="card-body">
-              <h6 class="card-title">{{ product.title }}</h6>
-              <a href="{{ product.affiliate_link }}" class="btn btn-success btn-sm" target="_blank">Buy Now</a>
+    <div class="col-md-6">
+      <h5 class="text-center"><i class="fas fa-star"></i> Panshral Picks</h5>
+      <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          {% assign featured = site.products | where: "tags", "featured" | slice: 0, 5 %}
+          {% for product in featured %}
+          <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <img src="{{ product.images[0] }}" class="d-block w-100" style="height:300px; object-fit:cover;" alt="{{ product.title }}">
+            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+              <h6>{{ product.title }}</h6>
+              <p>{{ product.short_description }}</p>
             </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
+        <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
       </div>
     </div>
 
@@ -61,7 +56,14 @@ title: Home
       <ul class="list-unstyled">
         {% assign weekly = site.products | where: "tags", "weekly" | slice: 0, 4 %}
         {% for product in weekly %}
-        <li><a href="{{ product.affiliate_link }}" target="_blank">{{ product.title }}</a></li>
+        <li class="mb-3 d-flex">
+          {% if product.images %}
+          <img src="{{ product.images[0] }}" alt="{{ product.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
+          {% endif %}
+          <div>
+            <a href="{{ product.affiliate_link }}" target="_blank"><strong>{{ product.title }}</strong></a>
+          </div>
+        </li>
         {% endfor %}
       </ul>
     </div>
