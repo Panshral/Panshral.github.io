@@ -8,61 +8,61 @@ title: Products
 
   <!-- Filter Buttons -->
   <div class="text-center mb-4" id="category-filters">
-    <button class="btn btn-outline-success me-2 filter-btn" data-filter="all" id="btn-all">
-      <i class="fas fa-border-all me-1"></i> All
-    </button>
+    <button class="btn btn-outline-success me-2 filter-btn" data-filter="all"><i class="fas fa-border-all me-1"></i> All</button>
     {% assign all_categories = site.products | map: "categories" | join: ',' | split: ',' | uniq %}
     {% for cat in all_categories %}
       {% assign cat_trimmed = cat | strip %}
       {% if cat_trimmed != "" %}
-      <button class="btn btn-outline-secondary me-2 filter-btn" data-filter="{{ cat_trimmed | downcase }}">
-        {{ cat_trimmed }}
-      </button>
+      <button class="btn btn-outline-secondary me-2 filter-btn" data-filter="{{ cat_trimmed | downcase }}">{{ cat_trimmed }}</button>
       {% endif %}
     {% endfor %}
   </div>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4" id="product-list">
+  <!-- Product Grid (5 per row using Bootstrap 5 col-md-2) -->
+  <div class="row row-cols-2 row-cols-sm-3 row-cols-md-5 g-3">
     {% assign sorted = site.products | sort: 'date' | reverse %}
     {% for product in sorted %}
     <div class="col product-card" data-category="{{ product.categories[0] | downcase }}">
       <div class="card h-100">
-        <img src="{{ product.images[0] }}" class="card-img-top" alt="{{ product.title }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ product.title }}</h5>
-          <p class="card-text">{{ product.short_description }}</p>
-          <a href="{{ product.affiliate_link }}" class="btn btn-success" target="_blank">Buy Now</a>
+        <img src="{{ product.images[0] }}" class="card-img-top product-image" alt="{{ product.title }}" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#modal-{{ forloop.index }}">
+        <div class="card-body p-2">
+          <h6 class="card-title">{{ product.title }}</h6>
+          <a href="{{ product.affiliate_link }}" class="btn btn-sm btn-success w-100 mt-2" target="_blank">Buy Now</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal fade" id="modal-{{ forloop.index }}" tabindex="-1" aria-labelledby="modalLabel-{{ forloop.index }}" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel-{{ forloop.index }}">{{ product.title }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            {% if product.images.size > 1 %}
+              <div class="mb-3 d-flex flex-wrap gap-2">
+                {% for img in product.images %}
+                <img src="{{ img }}" class="img-thumbnail" style="max-height:150px;">
+                {% endfor %}
+              </div>
+            {% else %}
+              <img src="{{ product.images[0] }}" class="img-fluid mb-3" alt="{{ product.title }}">
+            {% endif %}
+            <p><strong>Store:</strong> {{ product.store }}</p>
+            <p>{{ product.description }}</p>
+          </div>
+          <div class="modal-footer">
+            <a href="{{ product.affiliate_link }}" class="btn btn-success" target="_blank">Buy from {{ product.store }}</a>
+          </div>
         </div>
       </div>
     </div>
     {% endfor %}
   </div>
 </section>
-<!--
-<script>
-  // Simple product filter
-  document.addEventListener('DOMContentLoaded', function () {
-    const buttons = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.product-card');
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.getAttribute('data-filter');
-        cards.forEach(card => {
-          const category = card.getAttribute('data-category');
-          if (filter === 'all' || filter === category) {
-            card.style.display = 'block';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  });
-</script>-->
-
-
-<!-- This section will show filtered view based on selection on Homepage-->  
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
@@ -95,7 +95,7 @@ title: Products
     // Apply initial filter from URL param
     applyFilter(currentFilter);
 
-    // Update filter on button click (forget the URL)
+    // Update filter on button click
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
         const newFilter = btn.getAttribute("data-filter");
