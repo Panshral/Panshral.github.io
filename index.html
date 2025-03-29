@@ -8,14 +8,31 @@ title: Home
   <div class="row">
 
     <!-- Left: Latest Blogs -->
-    <div class="col-md-3">
+    <!--<div class="col-md-3">
       <h5><i class="fas fa-rss"></i> Latest Blogs</h5>
       <ul class="list-unstyled">
         {% for post in site.posts limit: 4 %}
         <li><a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}
       </ul>
-    </div>
+    </div>-->
+
+    <!-- Latest Blogs with image -->
+    <ul class="list-unstyled">
+      {% for post in site.posts limit: 3 %}
+      <li class="mb-3 d-flex">
+        {% if post.cover_image %}
+        <img src="{{ post.cover_image }}" alt="{{ post.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
+        {% endif %}
+        <div>
+          <a href="{{ post.url }}"><strong>{{ post.title }}</strong></a><br>
+          <small>{{ post.date | date: "%b %d, %Y" }}</small>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+
 
     <!-- Center: Featured Products -->
     <div class="col-md-6 text-center">
