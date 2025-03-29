@@ -66,18 +66,21 @@ title: Products
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const urlParams = new URLSearchParams(window.location.search);
-    const initialFilter = urlParams.get("category");
+    let currentFilter = urlParams.get("category") ? urlParams.get("category").toLowerCase() : "all";
+
     const cards = document.querySelectorAll(".product-card");
     const buttons = document.querySelectorAll(".filter-btn");
 
     function applyFilter(filterValue) {
-      // Show/hide cards
+      currentFilter = filterValue;
+
+      // Show/hide product cards
       cards.forEach(card => {
         const category = card.getAttribute("data-category");
         card.style.display = (filterValue === 'all' || category.includes(filterValue)) ? "block" : "none";
       });
 
-      // Reset button styles
+      // Update button styling
       buttons.forEach(btn => {
         if (btn.getAttribute("data-filter") === filterValue) {
           btn.classList.remove("btn-outline-secondary");
@@ -89,16 +92,14 @@ title: Products
       });
     }
 
-    // Apply initial filter from query string
-    if (initialFilter) {
-      applyFilter(initialFilter.toLowerCase());
-    }
+    // Apply initial filter from URL param
+    applyFilter(currentFilter);
 
-    // Apply filter on button click
+    // Update filter on button click (forget the URL)
     buttons.forEach(btn => {
       btn.addEventListener("click", () => {
-        const filterValue = btn.getAttribute("data-filter");
-        applyFilter(filterValue);
+        const newFilter = btn.getAttribute("data-filter");
+        applyFilter(newFilter);
       });
     });
   });
