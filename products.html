@@ -1,13 +1,13 @@
 ---
 layout: default
-title: Home
+title: Products
 ---
 
 <section class="container">
-  <h2 class="text-center mb-4">Panshral Picks</h2>
+  <h2 class="text-center mb-4">All Products</h2>
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    {% assign featured = site.products | sort: 'date' | reverse | slice: 0, 6 %}
-    {% for product in featured %}
+    {% assign sorted = site.products | sort: 'date' | reverse %}
+    {% for product in sorted %}
     <div class="col">
       <div class="card h-100">
         <img src="{{ product.images[0] }}" class="card-img-top" alt="{{ product.title }}">
