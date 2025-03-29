@@ -56,3 +56,26 @@ title: Products
     });
   });
 </script>
+
+
+<!-- This section will show filtered view based on selection on Homepage-->  
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const categoryFilter = urlParams.get("category");
+
+    if (categoryFilter) {
+      const cards = document.querySelectorAll(".product-card");
+      cards.forEach(card => {
+        const category = card.getAttribute("data-category");
+        if (category.toLowerCase() !== categoryFilter.toLowerCase()) {
+          card.style.display = "none";
+        }
+      });
+
+      // Scroll into view
+      const title = document.querySelector("h2");
+      if (title) title.scrollIntoView({ behavior: "smooth" });
+    }
+  });
+</script>

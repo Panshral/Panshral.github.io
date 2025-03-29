@@ -78,7 +78,7 @@ title: Home
 <section class="container mb-5">
   <div class="d-flex justify-content-between align-items-center mb-2">
     <h5 class="mb-0">{{ category }}</h5>
-    <a href="/products.html" class="btn btn-link btn-sm">See All →</a>
+    <a href="/products.html?category={{ category | uri_escape }}" class="btn btn-outline-success btn-sm">See All <i class="fas fa-arrow-right ms-1"></i></a>
   </div>
 
   <div class="row flex-nowrap overflow-auto">
