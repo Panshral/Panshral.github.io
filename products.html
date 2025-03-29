@@ -5,19 +5,54 @@ title: Products
 
 <section class="container">
   <h2 class="text-center mb-4">All Products</h2>
-  <div class="row row-cols-1 row-cols-md-3 g-4">
+
+  <!-- Filter Buttons -->
+  <div class="text-center mb-4">
+    <button class="btn btn-outline-success me-2 filter-btn" data-filter="all"><i class="fas fa-border-all me-1"></i>All</button>
+    {% assign all_categories = site.products | map: "categories" | join: ',' | split: ',' | uniq %}
+    {% for cat in all_categories %}
+      {% assign cat_trimmed = cat | strip %}
+      {% if cat_trimmed != "" %}
+      <button class="btn btn-outline-secondary me-2 filter-btn" data-filter="{{ cat_trimmed | downcase }}">{{ cat_trimmed }}</button>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4" id="product-list">
     {% assign sorted = site.products | sort: 'date' | reverse %}
     {% for product in sorted %}
-    <div class="col">
+    <div class="col product-card" data-category="{{ product.categories[0] | downcase }}">
       <div class="card h-100">
         <img src="{{ product.images[0] }}" class="card-img-top" alt="{{ product.title }}">
         <div class="card-body">
           <h5 class="card-title">{{ product.title }}</h5>
           <p class="card-text">{{ product.short_description }}</p>
-          <a href="{{ product.affiliate_link }}" class="btn btn-success">Buy Now</a>
+          <a href="{{ product.affiliate_link }}" class="btn btn-success" target="_blank">Buy Now</a>
         </div>
       </div>
     </div>
     {% endfor %}
   </div>
 </section>
+
+<script>
+  // Simple product filter
+  document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.product-card');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        cards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || filter === category) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
