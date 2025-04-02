@@ -23,30 +23,72 @@ title: Products
     {% assign sorted = site.products | sort: 'date' | reverse %}
     {% for product in sorted %}
     <div class="col product-card" data-category="{{ product.categories[0] | downcase }}">
-      <div class="card h-100">
-        <div id="carousel-prod-{{ forloop.index }}" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          {% for img in product.images %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ img }}" class="d-block w-100" alt="{{ product.title }}" style="max-height: 200px; object-fit: contain;">
-          </div>
-          {% endfor %}
+  <div class="card h-100">
+    <div id="carousel-prod-{{ forloop.index }}" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        {% for img in product.images %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+          <img src="{{ img }}" class="d-block w-100" style="max-height: 220px; object-fit: contain;" alt="{{ product.title }}">
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carousel-prod-{{ forloop.index }}" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carousel-prod-{{ forloop.index }}" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </button>
+        {% endfor %}
       </div>
-        <div class="card-body p-2">
-          <h6 class="card-title">{{ product.title }}</h6>
-          <a href="{{ product.affiliate_link }}" class="btn btn-sm btn-success w-100 mt-2" target="_blank">Buy Now</a>
-        </div>
-      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carousel-prod-{{ forloop.index }}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carousel-prod-{{ forloop.index }}" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+    <div class="card-body text-center p-2">
+      <h6 class="card-title">{{ product.title }}</h6>
+      <a href="{{ product.affiliate_link }}" class="btn btn-sm btn-success mt-2 w-100" target="_blank">Buy Now</a>
+    </div>
+  </div>
+</div>
+
     </div>
 
-    
+    <!-- Compact Modal -->
+    <div class="modal fade" id="modal-{{ forloop.index }}" tabindex="-1" aria-labelledby="modalLabel-{{ forloop.index }}" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header py-2">
+            <h6 class="modal-title" id="modalLabel-{{ forloop.index }}">{{ product.title }}</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.8rem;"></button>
+          </div>
+          <div class="modal-body py-3">
+            <div class="row">
+              <!-- Thumbnails -->
+              <div class="col-3">
+                <div class="nav flex-column nav-pills" id="thumbs-{{ forloop.index }}" role="tablist" aria-orientation="vertical">
+                  {% for img in product.images %}
+                  <button class="nav-link p-1 {% if forloop.first %}active{% endif %}" id="thumb-{{ forloop.index }}-{{ forloop.index0 }}"
+                    data-bs-toggle="pill"
+                    data-bs-target="#mainimg-{{ forloop.index }}-{{ forloop.index0 }}"
+                    type="button" role="tab">
+                    <img src="{{ img }}" class="img-fluid border" style="max-height: 60px;">
+                  </button>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- Main Image + Description -->
+              <div class="col-9">
+                <div class="tab-content" id="mainimage-{{ forloop.index }}">
+                  {% for img in product.images %}
+                  <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="mainimg-{{ forloop.index }}-{{ forloop.index0 }}" role="tabpanel">
+                    <img src="{{ img }}" class="img-fluid mb-3 w-100" style="max-height: 300px; object-fit: contain;">
+                  </div>
+                  {% endfor %}
+                </div>
+                <p class="mb-1"><strong>Store:</strong> {{ product.store }}</p>
+                <p class="small">{{ product.description }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer py-2">
+            <a href="{{ product.affiliate_link }}" class="btn btn-success btn-sm" target="_blank">Buy from {{ product.store }}</a>
+          </div>
         </div>
       </div>
     </div>
