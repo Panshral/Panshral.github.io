@@ -3,6 +3,7 @@ description: Curated affiliate picks in fashion, tech, fitness & health
 baseurl: ""
 url: ""
 markdown: kramdown
+google_analytics: G-Z1BXMR82F5
 
 collections:
   products:
