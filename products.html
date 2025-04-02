@@ -32,7 +32,37 @@ title: Products
       </div>
     </div>
 
-    
+    <!-- Compact Modal -->
+    <div class="modal fade" id="modal-{{ forloop.index }}" tabindex="-1" aria-labelledby="modalLabel-{{ forloop.index }}" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-header py-2">
+            <h6 class="modal-title" id="modalLabel-{{ forloop.index }}">{{ product.title }}</h6>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="font-size: 0.8rem;"></button>
+          </div>
+          <div class="modal-body py-3">
+            <div class="row">
+              <!-- Thumbnails -->
+              <div class="col-3">
+                <div class="nav flex-column nav-pills" id="thumbs-{{ forloop.index }}" role="tablist" aria-orientation="vertical">
+                  {% for img in product.images %}
+                  <button class="nav-link p-1 {% if forloop.first %}active{% endif %}" id="thumb-{{ forloop.index }}-{{ forloop.index0 }}"
+                    data-bs-toggle="pill"
+                    data-bs-target="#mainimg-{{ forloop.index }}-{{ forloop.index0 }}"
+                    type="button" role="tab">
+                    <img src="{{ img }}" class="img-fluid border" style="max-height: 60px;">
+                  </button>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <!-- Main Image + Description -->
+              <div class="col-9">
+                <div class="tab-content" id="mainimage-{{ forloop.index }}">
+                  {% for img in product.images %}
+                  <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="mainimg-{{ forloop.index }}-{{ forloop.index0 }}" role="tabpanel">
+                    <img src="{{ img }}" class="img-fluid mb-3 w-100" style="max-height: 300px; object-fit: contain;">
+                  </div>
                   {% endfor %}
                 </div>
                 <p class="mb-1"><strong>Store:</strong> {{ product.store }}</p>
