@@ -90,7 +90,24 @@ title: Home
     {% for product in items %}
     <div class="col-6 col-md-4 col-lg-3">
       <div class="card h-100 me-3">
-        <img src="{{ product.images[0] }}" class="card-img-top" style="max-height: 240px; object-fit: contain;" alt="{{ product.title }}">
+        <!--<img src="{{ product.images[0] }}" class="card-img-top" style="max-height: 240px; object-fit: contain;" alt="{{ product.title }}">-->
+
+        <div id="carousel-home-{{ forloop.index }}" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for img in product.images %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{{ img }}" class="d-block w-100" alt="{{ product.title }}" style="max-height: 240px; object-fit: contain;">
+            </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-home-{{ forloop.index }}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-home-{{ forloop.index }}" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+        
         <div class="card-body p-2">
           <h6 class="card-title" style="font-size: 0.9rem;">{{ product.title }}</h6>
           <a href="{{ product.affiliate_link }}" class="btn btn-sm btn-success w-100">Buy</a>
