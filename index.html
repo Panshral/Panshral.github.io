@@ -51,21 +51,25 @@ title: Home
     </div>
 
     <!-- Right: Weekly Picks -->
-    <div class="col-md-3">
-      <h5><i class="fas fa-calendar-week"></i> Weekly Deals</h5>
-      <ul class="list-unstyled">
-        {% assign weekly = site.products | where: "tags", "weekly" | slice: 0, 4 %}
-        {% for product in weekly %}
-        <li class="mb-3 d-flex">
-          {% if product.images %}
-          <img src="{{ product.images[0] }}" alt="{{ product.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
-          {% endif %}
-          <div>
-            <a href="{{ product.affiliate_link }}" target="_blank"><strong>{{ product.title }}</strong></a>
-          </div>
-        </li>
-        {% endfor %}
-      </ul>
+<div class="col-md-3">
+<h5><i class="fas fa-calendar-week"></i> Weekly Deals</h5>
+
+<ul class="list-unstyled">
+  {% assign weekly = site.products | where: "tags", "weekly" | slice: 0, 4 %}
+  {% for product in weekly %}
+  <li class="mb-3 d-flex">
+    {% if product.images %}
+    <img src="{{ product.images[0] }}" alt="{{ product.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
+    {% endif %}
+    <div>
+      <a href="{{ product.affiliate_link }}" target="_blank"><strong>{{ product.title }}</strong></a><br>
+      <small>{{ product.short_description | truncate: 80 }}</small>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+
+</div>
     </div>
   </div>
 </section>
@@ -84,9 +88,9 @@ title: Home
   <div class="row flex-nowrap overflow-auto">
     {% assign items = site.products | where_exp: "item", "item.categories contains category" | sort: "date" | reverse | slice: 0, 9 %}
     {% for product in items %}
-    <div class="col-6 col-md-3 col-lg-2">
+    <div class="col-6 col-md-4 col-lg-3">
       <div class="card h-100 me-3">
-        <img src="{{ product.images[0] }}" class="card-img-top" alt="{{ product.title }}">
+        <img src="{{ product.images[0] }}" class="card-img-top" style="max-height: 240px; object-fit: contain;" alt="{{ product.title }}">
         <div class="card-body p-2">
           <h6 class="card-title" style="font-size: 0.9rem;">{{ product.title }}</h6>
           <a href="{{ product.affiliate_link }}" class="btn btn-sm btn-success w-100">Buy</a>
