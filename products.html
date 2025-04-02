@@ -24,7 +24,28 @@ title: Products
     {% for product in sorted %}
     <div class="col product-card" data-category="{{ product.categories[0] | downcase }}">
       <div class="card h-100">
-        <img src="{{ product.images[0] }}" class="card-img-top product-image" alt="{{ product.title }}" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#modal-{{ forloop.index }}">
+        <!-- <img src="{{ product.images[0] }}" class="card-img-top product-image" alt="{{ product.title }}" style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#modal-{{ forloop.index }}">-->
+
+        <div id="carousel-{{ forloop.index }}" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            {% for img in product.images %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+              <img src="{{ img }}" class="d-block w-100" alt="{{ product.title }}" style="max-height: 220px; object-fit: contain;">
+            </div>
+            {% endfor %}
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ forloop.index }}" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ forloop.index }}" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+        
+
+
+
+
         <div class="card-body p-2">
           <h6 class="card-title">{{ product.title }}</h6>
           <a href="{{ product.affiliate_link }}" class="btn btn-sm btn-success w-100 mt-2" target="_blank">Buy Now</a>
