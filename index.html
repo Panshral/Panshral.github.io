@@ -11,7 +11,7 @@ title: Home
     <div class="col-md-3">
       <h5><i class="fas fa-rss"></i> Latest Blogs</h5>
       <ul class="list-unstyled">
-        {% for post in site.posts limit: 3 %}
+        {% for post in site.posts limit: 5 %}
         <li class="mb-3 d-flex">
           {% if post.cover_image %}
           <img src="{{ post.cover_image }}" alt="{{ post.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
@@ -55,7 +55,7 @@ title: Home
 <h5><i class="fas fa-calendar-week"></i> Weekly Deals</h5>
 
 <ul class="list-unstyled">
-  {% assign weekly = site.products | where: "tags", "weekly" | slice: 0, 4 %}
+  {% assign weekly = site.products | where: "tags", "weekly" | slice: 0, 7 %}
   {% for product in weekly %}
   <li class="mb-3 d-flex">
     {% if product.images %}
@@ -96,7 +96,7 @@ title: Home
           <div class="carousel-inner">
             {% for img in product.images %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-              <img src="{{ img }}" class="d-block w-100" alt="{{ product.title }}" style="max-height: 240px; object-fit: contain;">
+              <img src="{{ img }}" class="d-block w-100" alt="{{ product.title }}" style="max-height: 320px; object-fit: contain;">
             </div>
             {% endfor %}
           </div>
