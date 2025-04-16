@@ -33,7 +33,7 @@ title: Home
           {% assign featured = site.products | where: "tags", "featured" | slice: 0, 5 %}
           {% for product in featured %}
           <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ product.images[0] }}" class="d-block w-100" style="height:300px; object-fit:cover;" alt="{{ product.title }}">
+            <img src="{{ product.images[0] }}" class="d-block w-100" style="height:1024px; width:1024px ; object-fit:contain;" alt="{{ product.title }}">
             <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
               <h6>{{ product.title }}</h6>
               <p>{{ product.short_description }}</p>
