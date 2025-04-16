@@ -92,7 +92,7 @@ title: Home
       <div class="card h-100 me-3">
         <!--<img src="{{ product.images[0] }}" class="card-img-top" style="max-height: 240px; object-fit: contain;" alt="{{ product.title }}">-->
 
-        <div id="carousel-home-{{ forloop.index }}" class="carousel slide" data-bs-ride="carousel">
+        <div id="carousel-home-{{ category | slugify }}-{{ forloop.index }}" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             {% for img in product.images %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
@@ -100,10 +100,10 @@ title: Home
             </div>
             {% endfor %}
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-home-{{ forloop.index }}" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-home-{{ category | slugify }}-{{ forloop.index }}" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carousel-home-{{ forloop.index }}" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#carousel-home-{{ category | slugify }}-{{ forloop.index }}" data-bs-slide="next">
             <span class="carousel-control-next-icon"></span>
           </button>
         </div>
