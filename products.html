@@ -30,7 +30,7 @@ title: Products
           <div class="carousel-inner">
             {% for img in product.images %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
-              <img src="{{ img }}" class="d-block w-100" alt="{{ product.title }}" style="max-height: 320px; object-fit: contain;">
+              <img src="{{ img }}" class="d-block w-100" alt="{{ product.title }}" style="max-height: 320px; object-fit: cover;">
             </div>
             {% endfor %}
           </div>
