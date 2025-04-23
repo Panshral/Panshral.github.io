@@ -4,7 +4,7 @@ description: 'Curated affiliate picks in fashion, fragrance, fitness & health.'
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
 baseurl: ''
-avatar: 'assets/images/logo.png'
+avatar: ''
 disqus: ''
 email: ''
 include: ["_pages"]
