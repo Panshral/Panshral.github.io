@@ -1,120 +1,56 @@
 ---
+title: "Pintereso Free Jekyll Theme"
 layout: default
-title: Home
+description: "A great collection of free and premium themes and templates."
 ---
 
-<!-- Top Section -->
-<section class="container mb-5">
-  <div class="row">
+<section class="mt-4 mb-5">
+    
+    <div class="container mb-4">
+        <h1 class="font-weight-bold title">Explore</h1>    
+        <div class="row">
+        {% include menu-categories.html %}
+        </div>
+    </div>
 
-    <!-- Latest Blogs with image -->
-    <div class="col-md-3">
-      <h5><i class="fas fa-rss"></i> Latest Blogs</h5>
-      <ul class="list-unstyled">
-        {% for post in site.posts limit: 5 %}
-        <li class="mb-3 d-flex">
-          {% if post.cover_image %}
-          <img src="{{ post.cover_image }}" alt="{{ post.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
+    
+<div class="container-fluid">
+    
+    <div class="card-columns">        
+        {% for post in paginator.posts reversed %}
+            {% include card-post.html %}
+        {% endfor %}            
+    </div>
+
+    <div class="row justify-content-center mt-5">
+     <!-- Pagination links -->
+        {% if paginator.total_pages > 1 %}
+        <div class="pagination"> 
+          {% if paginator.previous_page %}
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+          {% else %}
+            <span class="prev">&laquo; Prev</span>
           {% endif %}
-          <div>
-            <a href="{{ post.url }}"><strong>{{ post.title }}</strong></a><br>
-            <small>{{ post.date | date: "%b %d, %Y" }}</small>
-          </div>
-        </li>
-        {% endfor %}
-      </ul>
-    </div>
 
-    <!-- Center: Featured Products -->
-    <div class="col-md-6">
-      <h5 class="text-center"><i class="fas fa-star"></i>Panshral Picks</h5>
-      <div id="featuredCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          {% assign featured = site.products | where: "tags", "featured" | slice: 0, 5 %}
-          {% for product in featured %}
-          <div class="carousel-item {% if forloop.first %}active{% endif %}">
-            <img src="{{ product.images[0] }}" class="d-block w-100" style="height:auto; width:100%; object-fit:cover;" alt="{{ product.title }}">
-            <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
-              <h6>{{ product.title }}</h6>
-              <!--<p>{{ product.short_description }}</p>-->
-            </div>
-          </div>
+          {% for page in (1..paginator.total_pages) %}
+            {% if page == paginator.page %}
+              <span class="webjeda">{{ page }}</span>
+            {% elsif page == 1 %}
+              <a href="{{site.baseurl}}/">{{ page }}</a>
+            {% else %}
+              <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+            {% endif %}
           {% endfor %}
+
+          {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+          {% else %}
+            <span class="next">Next &raquo;</span>
+          {% endif %}
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#featuredCarousel" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#featuredCarousel" data-bs-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </button>
-      </div>
+        {% endif %}      
     </div>
 
-    <!-- Right: Weekly Picks -->
-<div class="col-md-3">
-<h5><i class="fas fa-calendar-week"></i> Weekly Deals</h5>
-
-<ul class="list-unstyled">
-  {% assign weekly = site.products | where: "tags", "weekly" | slice: 0, 7 %}
-  {% for product in weekly %}
-  <li class="mb-3 d-flex">
-    {% if product.images %}
-    <img src="{{ product.images[0] }}" alt="{{ product.title }}" style="width: 60px; height: 60px; object-fit: cover; margin-right: 10px;">
-    {% endif %}
-    <div>
-      <a href="{{ product.affiliate_link }}" target="_blank"><strong>{{ product.title }}</strong></a><br>
-      <small>{{ product.short_description | truncate: 23 }}</small>
-    </div>
-  </li>
-  {% endfor %}
-</ul>
-
-</div>
-    </div>
-  </div>
+</div>    
+  
 </section>
-
-
-<!-- Product Carousels by Category -->
-{% assign categories = site.products | map: "categories" | join: ',' | split: ',' | uniq %}
-
-{% for category in categories %}
-<section class="container mb-5">
-  <div class="d-flex justify-content-between align-items-center mb-2">
-    <h5 class="mb-0">{{ category }}</h5>
-    <a href="/products.html?category={{ category | uri_escape }}" class="btn btn-outline-success btn-sm">See All <i class="fas fa-arrow-right ms-1"></i></a>
-  </div>
-
-  <div class="row flex-nowrap overflow-auto">
-    {% assign items = site.products | where_exp: "item", "item.categories contains category" | sort: "date" | reverse | slice: 0, 9 %}
-    {% for product in items %}
-    <div class="col-6 col-md-4 col-lg-3">
-      <div class="card h-100 me-3">
-        <!--<img src="{{ product.images[0] }}" class="card-img-top" style="max-height: 240px; object-fit: contain;" alt="{{ product.title }}">-->
-
-        <div id="carousel-home-{{ category | slugify }}-{{ forloop.index }}" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-            {% for img in product.images %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-              <img src="{{ img }}" class="d-block w-100" alt="{{ product.title }}" style="max-height: 320px; max-width: 320px; object-fit:cover;">
-            </div>
-            {% endfor %}
-          </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carousel-home-{{ category | slugify }}-{{ forloop.index }}" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carousel-home-{{ category | slugify }}-{{ forloop.index }}" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-          </button>
-        </div>
-        
-        <div class="card-body p-2">
-          <h6 class="card-title" style="font-size: 0.9rem;">{{ product.title }}</h6>
-          <a href="{{ product.affiliate_link }}" class="btn btn-sm btn-success w-100">Buy</a>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</section>
-{% endfor %}
