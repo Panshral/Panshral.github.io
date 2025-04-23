@@ -3,7 +3,7 @@ layout: post
 title: "Best Fitness Trackers to Buy in 2025"
 date: 2025-03-30
 category: Technology
-cover_image: /assets/img/product-img/product5.jpg
+cover_image: /assets/img/product-img/product6.jpg
 ---
 
 Looking to stay on top of your fitness goals in 2025? We reviewed the latest fitness trackers and shortlisted the best performers across categories and budgets.
