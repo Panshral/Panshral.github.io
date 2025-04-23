@@ -1,7 +1,7 @@
 ---
 title:  "BIBA Rayon Kurti"
 metadate: "hide"
-categories: [ Women, Tops, Everyday]
+categories: [ Women, Tops, Everyday, Kurti]
 image: "assets/images/2025/April/2025-04-16-P2.png"
 visit: "https://amzn.to/3Epmp7a"
 ---
