@@ -1,13 +1,12 @@
 # Site
 name: 'Panshral'
-description: 'Curated affiliate picks in fashion, fragrance, fitness & health'
+description: 'Curated affiliate picks in fashion, fragrance, fitness & health.'
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/logo.png'
-baseurl: ''
-avatar: ''
+baseurl: 'panshral.com'
+avatar: 'assets/images/logo.png'
 disqus: ''
 email: ''
-
 include: ["_pages"]
 permalink: /:title/
 google_analytics: G-Z1BXMR82F5
