@@ -2,9 +2,7 @@
 title:  "Globus Halter Style Party Jumspuit"
 metadate: "hide"
 categories: [ Women, Tops, Party]
-images: 
-    - assets/images/PNL20250400002-1.png
-    - assets/images/PNL20250400002-2.png
+image: "assets/images/PNL20250400002-1.png"
 
 visit: "https://amzn.to/3G9ZCN3"
 ---
