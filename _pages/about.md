@@ -10,7 +10,6 @@ Born from a love for self-expression, elegance, and everyday creativity, Panshra
 Rooted in the vision of making unique, aesthetic fashion accessible, **Panshral.com** offers carefully selected collections that blend global trends with individual charm. Whether it’s a breezy playsuit for sunlit days, a minimal accessory for subtle impact, or a statement piece for unforgettable nights, every item we showcase tells a story — your story.
 
 **Our Philosophy** is simple:<br />
-
 ***✨ Elevate the everyday.***
 ***✨ Celebrate individuality.***
 ***✨ Embrace effortless beauty.***
