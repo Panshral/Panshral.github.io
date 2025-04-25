@@ -291,10 +291,10 @@ article .card-body {
     color:#333;
 }
 a.prev {    
-    left: 50px;    
+    left: 25px;    
 }
 a.next {
-    right: 50px;
+    right: 25px;
 }
 #resultsmodal {
      background: rgba(255,255,255,0.8);
