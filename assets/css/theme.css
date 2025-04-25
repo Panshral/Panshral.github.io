@@ -512,9 +512,8 @@ a.next {
 
 
 .card-img-top {
-  max-width: 10px;
-  height: 10px;
-  align-content: center;
-  object-fit: scale-down; /* optional, makes it look more polished */
+  max-width: 100px;
+  height: 100px;
+  object-fit: fill; /* optional, makes it look more polished */
   border-radius: 5px; /* optional, soft rounded corners */
 }
