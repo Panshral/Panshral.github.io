@@ -512,9 +512,9 @@ a.next {
 
 
 .card-img-top {
-  max-width: 100px;
-  height: 100px;
+  max-width: 10px;
+  height: 10px;
   align-content: center;
-  
-  border-radius: 8px; /* optional, soft rounded corners */
+  object-fit: scale-down; /* optional, makes it look more polished */
+  border-radius: 5px; /* optional, soft rounded corners */
 }
