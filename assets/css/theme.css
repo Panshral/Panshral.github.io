@@ -242,9 +242,7 @@ article .card-body {
      transition: all 0.2s;
     position: relative;
 }
-.card-pin.raco:hover .fa:before {
-    
-}
+
 .car-pin.raco:hover .fa:before {    
      -webkit-animation: pulse 2s ease-in;
     -moz-animation: pulse 2s ease-in;
@@ -269,8 +267,13 @@ article .card-body {
     border-radius: 2px;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
 }
+
+.PageNavigation {
+  position: relative;
+}
+
 .PageNavigation a {
-    position: fixed;
+    position: absolute;
     top: 47%;
     font-weight: 700;
     color: #989696;
