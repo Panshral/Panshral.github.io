@@ -1,35 +1,30 @@
 ---
 title: "About"
 permalink: "/about.html"
-image: "/assets/images/screenshot.jpg"
+image: "/assets/images/logo.png"
 ---
 
-Hi, guys! The website you are previewing is a demonstration for Pintereso Jekyll theme and it is hosted on Github pages. There are various ways you can use Pintereso with your Jekyll website. Here are some of them:
+At Panshral, we believe style is more than appearance — it’s an experience.
+Born from a love for self-expression, elegance, and everyday creativity, Panshral curates a growing world of fashion, lifestyle, and inspiration designed for the dreamers, the doers, and the beautifully bold.
 
-- blogging
-- curated resources
-- affiliate marketing
-- resume
-- portfolio
-- photography
+Rooted in the vision of making unique, aesthetic fashion accessible, **Panshral.com** offers carefully selected collections that blend global trends with individual charm. Whether it’s a breezy playsuit for sunlit days, a minimal accessory for subtle impact, or a statement piece for unforgettable nights, every item we showcase tells a story — your story.
 
-**Features**
+**Our Philosophy** is simple:
+***✨ Elevate the everyday.***
+***✨ Celebrate individuality.***
+***✨ Embrace effortless beauty.***
 
-- 100% Github Pages Compatibility
-- Bootstrap 4.x
-- SEO Integration
-- Search
-- Categories
-- Prev/Next Post
-- Pagination
-- Disqus Comments
-- Sitemap
-- Feed
-- Formspree Contact Form
-- Pinterest, AddThis, Google Analytics
-- Font Awesome 5+
-- Cookie Consent & Privacy Policy
+At Panshral, we don’t just sell products — we craft moments. Every piece is chosen to inspire confidence, spark creativity, and let you shine in your own authentic way.
 
-Made with <i class="fa fa-heart text-danger"></i> by Sal @wowthemesnet. Thanks for your <a target="_blank" href="https://www.wowthemes.net/freebies-license/">support</a>!
+As we grow, our commitment remains steady:
 
-<a class="btn btn-danger" href="https://github.com/wowthemesnet/template-pintereso-bootstrap-jekyll/archive/master.zip"><i class="fa fa-download"></i> pintereso.zip</a> <a target="_blank" class="btn btn-warning" href="https://www.wowthemes.net/donate/"><i class="fa fa-coffee"></i> Buy me a coffee?</a>
+Curating collections that feel personal yet universal.
+
+Creating content and experiences that empower.
+
+Building a community that celebrates style as a journey, not a destination.
+
+We’re proud to invite you into the Panshral universe — where fashion flows with spirit, and everyday life is a little more luminous.
+
+**Welcome to Panshral.**
+*Find your style. Find yourself.*
