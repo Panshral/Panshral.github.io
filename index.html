@@ -16,9 +16,8 @@ description: "Curated affiliate picks in fashion, fragrance, fitness & health."
     
 <div class="container-fluid">
     
-    <div class="card-columns">  
-        {% assign reversed_posts = paginator.posts | reverse %}      
-        {% for post in reversed_posts %}
+    <div class="card-columns">        
+        {% for post in paginator.posts %}
             {% include card-post.html %}
         {% endfor %}            
     </div>
