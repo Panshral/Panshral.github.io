@@ -1,7 +1,7 @@
 ---
 title: "About"
 permalink: "/about.html"
-image: "assets/images/logo.png"
+image: "assets/images/About.png"
 ---
 
 At Panshral, we believe style is more than appearance — it’s an experience.
