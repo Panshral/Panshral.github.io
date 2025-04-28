@@ -509,11 +509,3 @@ a.next {
 .highlight {
   background-color: #f8f8f8;
 }
-
-
-.card-img-top {
-  max-width: 100px;
-  height: 100px;
-  object-fit: fill; /* optional, makes it look more polished */
-  border-radius: 5px; /* optional, soft rounded corners */
-}
